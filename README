@@ -1,0 +1,24 @@
+This is a simple class for EM algorithm
+
+1, set your initial clusters' centers typed np.array, and put all the centers in a list(c_init);
+2, read the training data, drop the column 'user_id' and take the values as training data(np.array)
+3, new a EM class:
+
+    'em = EM.EM(data.values, c_init, MAX_ITER)'
+                   |           |        |
+                   |           |    iteration times(default=50)
+               np.array    list(np.array, np.array,...)
+
+4, use method 'train' to train the model:
+
+    'em.train()'
+
+   then you will see the training information popping out.
+
+5, after the training, you can check the model information:
+
+    'em.CURR_CEN' for the final clusters' centers.
+    'em.LAST_CEN' for the clusters' centers before the final one.
+    'em.iteration' for the times it train the model
+    'em.CLUSTERS' for the final output of clustering, containing labels for all the objects
+    'em.SSE' for SSE value for every iteration
