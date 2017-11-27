@@ -15,8 +15,9 @@ class EM():
     C_NUM = 0
     iteration = 0
     SSE = []
+    EPSILON = 0
 
-    def __init__(self, DATA, CURR_CEN, MAX_ITER=50):
+    def __init__(self, DATA, CURR_CEN, MAX_ITER=50, EPSILON=0.001):
         """
 
         :param DATA: this is the training data should be inputted,
@@ -32,6 +33,7 @@ class EM():
         self.CLUSTERS = np.zeros((DATA.shape[0], 1))
         self.C_NUM = len(CURR_CEN)
         self.MAX_ITER = MAX_ITER
+        self.EPSILON = EPSILON
 
     def build_matrix(self):
         """
@@ -139,7 +141,7 @@ class EM():
         cur_iter = 0
         self.build_matrix()
 
-        while (epsilon > 0.001) and (cur_iter < self.MAX_ITER):
+        while (epsilon > self.EPSILON) and (cur_iter < self.MAX_ITER):
 
             self.LAST_CEN = []
 
@@ -150,7 +152,6 @@ class EM():
             self.e_step()
             self.m_step()
             self.cal_SSE()
-
 
             last_cur = self.LAST_CEN
 

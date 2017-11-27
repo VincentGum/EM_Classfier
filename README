@@ -4,10 +4,10 @@ This is a simple class for EM algorithm
 2, read the training data, drop the column 'user_id' and take the values as training data(np.array)
 3, new a EM class:
 
-    'em = EM.EM(data.values, c_init, MAX_ITER)'
-                   |           |        |
-                   |           |    iteration times(default=50)
-               np.array    list(np.array, np.array,...)
+    'em = EM.EM(data.values, c_init, MAX_ITER, EPSILON)'
+    c_init: initial centers for each cluster list[np.array, np.array...]
+    MAX_ITER: default=50
+    EPSILON: default=0.001
 
 4, use method 'train' to train the model:
 
