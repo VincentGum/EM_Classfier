@@ -13,7 +13,7 @@ c1 = np.array([1, 1, 1, 1, 1, 1])
 c2 = np.array([0, 0, 0, 0, 0, 0])
 c_init = [c1, c2]
 
-em = EM.EM(data.values, c_init, 50)
+em = EM.EM(data.values, c_init)
 em.train()
 
 print(em.SSE)

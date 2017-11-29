@@ -4,36 +4,31 @@ Author: VincentGum
 """
 import numpy as np
 
+
 class EM():
 
-    MAX_ITER = 0  # only run for less than 500 times
-    DATA = np.array([1, 1])  # the training data
-    LAST_CEN = []  # the clusters' centers for the last iteration
-    CURR_CEN = []  # the clusters' centers for current iteration
-    M = np.zeros((1, 1))  # a matrix having each row representing each object, and each col for each cluster
-    CLUSTERS = np.array([1, 1])  # an array containing cluster labels for each object
-    C_NUM = 0
-    iteration = 0
-    SSE = []
-    EPSILON = 0
-
-    def __init__(self, DATA, CURR_CEN, MAX_ITER=50, EPSILON=0.001):
+    def __init__(self, data, curr_cen, max_iter=50, epsilon=0.001):
         """
 
-        :param DATA: this is the training data should be inputted,
+        :param data: this is the training data should be inputted,
                take the given data set for example, it is shaped 695 * 6(regardless to user_id)
                for each row is an single object, each col is an attribute
-        :param CURR_CEN: is a list containing N np.array, representing N cluster center.
+        :param curr_cen: is a list containing N np.array, representing N cluster center.
                initial clusters' centers should be given
 
         Given DATA and CURR_CEN, let's say that we have N objects and C clusters
         """
-        self.DATA = DATA
-        self.CURR_CEN = CURR_CEN
-        self.CLUSTERS = np.zeros((DATA.shape[0], 1))
-        self.C_NUM = len(CURR_CEN)
-        self.MAX_ITER = MAX_ITER
-        self.EPSILON = EPSILON
+        self.DATA = data
+        self.CURR_CEN = curr_cen
+        self.LAST_CEN = []  # the clusters' centers for the last iteration
+        self.CLUSTERS = np.zeros((data.shape[0], 1))
+        self.C_NUM = len(curr_cen)
+        self.MAX_ITER = max_iter
+        self.EPSILON = epsilon
+        self.MAX_ITER = max_iter  # only run for less than 500 times
+        self.M = np.zeros((1, 1))  # a matrix having each row representing each object, and each col for each cluster
+        self.iteration = 0
+        self.SSE = []
 
     def build_matrix(self):
         """
@@ -120,7 +115,7 @@ class EM():
 
             self.CURR_CEN[c] = cur_cen
 
-    def cal_SSE(self):
+    def cal_sse(self):
 
         objs = self.DATA
         rows, cols = objs.shape
@@ -151,7 +146,7 @@ class EM():
             # the main step to train
             self.e_step()
             self.m_step()
-            self.cal_SSE()
+            self.cal_sse()
 
             last_cur = self.LAST_CEN
 
